@@ -1,0 +1,16 @@
+{
+  "id": "1",
+  "params": {
+    "temp": { "value": 25.59 },
+    "humi": { "value": 21.0 },
+    "start_time": { "value": 1638406375 },
+    "last_time": { "value": 1638410370 },
+    "tempLA": { "value": 0 },
+    "tempUA": { "value": 0 },
+    "$OneNET_LBS": {
+      "value": [
+        { "cid": 185749597, "lac": 21390, "mcc": 460, "mnc": 0, "flag": 10 }
+      ]
+    }
+  }
+}
