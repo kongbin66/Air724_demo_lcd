@@ -13,20 +13,23 @@ function function_keyIntFnc(msg)
         -- 上升沿中断
         if msg == cpu.INT_GPIO_POSEDGE then
             function_key_down_end = rtos.tick()
-            if function_key_down_end - function_key_down_start > 400 then
-                _G.FLY_STATE = not _G.FLY_STATE
-                if _G.FLY_STATE then
-                    log.info("********************************进入飞行模式")
-                    net.switchFly(true)
-                    _G.SINGLE_QUERY = 0
-                else
-                    log.info("********************************退出飞行模式")
-                    net.switchFly(flase)
-                    _G.SINGLE_QUERY = 26
-                end
-            end
+            --KB:下列程序是飞行模式控制，将其删除。
+            --if function_key_down_end - function_key_down_start > 400 then
+                -- _G.FLY_STATE = not _G.FLY_STATE
+                -- if _G.FLY_STATE then
+                --     log.info("********************************进入飞行模式")
+                --     net.switchFly(true)
+                --     _G.SINGLE_QUERY = 0
+                --     log.info("fy!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!fy")
+                -- else
+                --     log.info("********************************退出飞行模式")
+                --     net.switchFly(flase)
+                --     _G.SINGLE_QUERY = 26
+                --     log.info("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
+                -- end
+            --end
             _G.SCREEN_STATE = _G.SCREEN_STATE + 1
-            if _G.SCREEN_STATE >= 7 then
+            if _G.SCREEN_STATE >= 4 then
                 _G.SCREEN_STATE = 0
             end
             pm.sleep("FUNC_KEY")
@@ -34,6 +37,7 @@ function function_keyIntFnc(msg)
             pm.wake("FUNC_KEY")
             function_key_down_start = rtos.tick()
             task_auto_screenoff.oled_on_start = rtos.tick()
+            log.info("444444444444444444444444444444444444444444444444444444444444444444444444")
         end
     end
     pm.sleep("FUNC_KEY")

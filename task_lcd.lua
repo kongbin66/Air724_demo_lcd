@@ -14,7 +14,7 @@ require "ntp"
 require "misc"
 
 ---------------------------------------------------------♥♥♥♥♥♥♥♥♥♥----------------
-function showInit()
+function showInit()--设置字体
     -- body
     sys.wait(2000)
     disp.clear()
@@ -22,12 +22,12 @@ function showInit()
     font_id2 = disp.loadfont("/lua/A5x10.bin")
     disp.setfont(font_id)
 end
-function showWelcome()
+function showWelcome()--开机界面
     disp.clear()
     disp.putimage("/lua/sc_welcome.png", 0, 0)
     disp.update()
 end
-function showTempHumi(temp, humi)
+function showTempHumi(temp, humi)--显示温湿度
     if temp == nil or humi == 0 then
         temp, humi = 0, 0
     end
@@ -64,7 +64,7 @@ function showTempHumi(temp, humi)
     disp.puttext(common.utf8ToGb2312("."), 111, 70)
     disp.puttext(common.utf8ToGb2312(humiL), 120, 70)
 end
-function showMsg(rec_count, device_name)
+function showMsg(rec_count, device_name)--显示记录条数和设备编号
     disp.setfontheight(14)
     disp.setcolor(0x0000)
     disp.setfont(font_id)
@@ -73,7 +73,7 @@ function showMsg(rec_count, device_name)
     end
     disp.puttext(common.utf8ToGb2312(device_name), 55, 110)
 end
-function ui_show_clock()
+function ui_show_clock()--显示时间日期
     local tm = misc.getClock()
     disp.setfont(font_id2)
     disp.setcolor(0x001F)
@@ -81,7 +81,7 @@ function ui_show_clock()
     disp.puttext(common.utf8ToGb2312(string.format("%02d/%02d", tm.month, tm.day)), 62, 4)
     disp.puttext(common.utf8ToGb2312(string.format("%02d:%02d", tm.hour, tm.min)), 94, 4)
 end
-function ui_show_batt()
+function ui_show_batt()--显示电量
     _G.BATT_CHARGING = misc.getVbus()
     if _G.BATT_CHARGING then
         _G.BATT_LEV = _G.BATT_LEV + 4
@@ -119,7 +119,7 @@ function ui_show_batt()
         disp.putimage("/lua/charge0.png", 130, 4)
     end
 end
-function ui_show_signal()
+function ui_show_signal()--显示信号强度 
     -- log.info("LCD_final获取信号强度",_G.SINGLE_QUERY)
     if _G.SINGLE_QUERY > 32 then
         disp.putimage("/lua/singal0.png", 6, 4)
@@ -152,14 +152,14 @@ function show_ui(rec_state)
         disp.putimage("/lua/bluetooth.png", 34, 4)
     else
         --------调试专用!!!!!!!!!!!!!!!!!!!!
-        if _G.tempfail == nil then
-            _G.tempfail = 99
-        end
-        if _G.temp_recstate == nil then
-            _G.temp_recstate = 31
-        end
-        disp.puttext(common.utf8ToGb2312(_G.tempfail), 34, 4)
-        disp.puttext(common.utf8ToGb2312(_G.temp_recstate), 1, 20)
+        -- if _G.tempfail == nil then
+        --     _G.tempfail = 99
+        -- end
+        -- if _G.temp_recstate == nil then
+        --     _G.temp_recstate = 31
+        -- end
+        -- disp.puttext(common.utf8ToGb2312(_G.tempfail), 34, 4)
+        -- disp.puttext(common.utf8ToGb2312(_G.temp_recstate), 1, 20)
 
     end
     if _G.LOCK_STATE then
@@ -232,6 +232,7 @@ function showinformation()
     disp.update()
 end
 ----------------------------------------------------------------------------------
+-- _G.SCREEN_STATE  0：主界面 1：飞行模式  2：超温报警 3：本机信息
 function lcd_while_lcdon()
     log.info("收到: LCD_STATE_ON")
     _G.lcdpin = pins.setup(13, 0)
@@ -244,15 +245,15 @@ function lcd_while_lcdon()
                 showLoop()
             elseif _G.SCREEN_STATE == 1 then
                 showflyscreen()
-            elseif _G.SCREEN_STATE == 2 then
-                showKGXscreen()
-            elseif _G.SCREEN_STATE == 3 then
-                showUscreen()
             elseif _G.SCREEN_STATE == 4 then
-                showTAscreen()
+                showKGXscreen()
             elseif _G.SCREEN_STATE == 5 then
-                showBLEscreen()
+                showUscreen()
+            elseif _G.SCREEN_STATE == 2 then
+                showTAscreen()
             elseif _G.SCREEN_STATE == 6 then
+                showBLEscreen()
+            elseif _G.SCREEN_STATE == 3 then
                 showinformation()
             end
             sys.wait(100)

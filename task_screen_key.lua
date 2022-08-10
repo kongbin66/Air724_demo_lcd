@@ -33,7 +33,6 @@ function screen_keyIntFnc(msg)
                 sys.publish("LCD_STATE_OFF")
                 pm.sleep("SCREEN_KEY")
             end
-        else
         end
     elseif _G.SCREEN_STATE == 1 then
         if msg == cpu.INT_GPIO_POSEDGE then
@@ -53,9 +52,8 @@ function screen_keyIntFnc(msg)
                 _G.LCD_STATE = true
                 _G.SCREEN_STATE = 0
             end
-        else
         end
-    elseif _G.SCREEN_STATE == 2 then
+    elseif _G.SCREEN_STATE == 4 then
         if msg == cpu.INT_GPIO_POSEDGE then
             pm.wake("SCREEN_KEY")
             if _G.LOCK_SCREEN_STATE then
@@ -71,48 +69,48 @@ function screen_keyIntFnc(msg)
             end
         else
         end
-    elseif _G.SCREEN_STATE == 3 then
+    elseif _G.SCREEN_STATE == 5 then
         if msg == cpu.INT_GPIO_POSEDGE then
             pm.wake("SCREEN_KEY")
             if _G.U_SCREEN_STATE then
-                log.info("********************************进入开关箱模式")
+                log.info("********************************进入U盘模式")
                 _G.U_STATE = true
                 _G.LCD_STATE = true
                 _G.SCREEN_STATE = 0
             else
-                log.info("********************************退出开关箱模式")
+                log.info("********************************退出U盘模式")
                 _G.U_STATE = false
                 _G.LCD_STATE = true
                 _G.SCREEN_STATE = 0
             end
         else
         end
-    elseif _G.SCREEN_STATE == 4 then
+    elseif _G.SCREEN_STATE == 2 then
         if msg == cpu.INT_GPIO_POSEDGE then
             pm.wake("SCREEN_KEY")
             if _G.TA_SCREEN_STATE then
-                log.info("********************************进入开关箱模式")
+                log.info("********************************进入温度超限模式")
                 _G.temp_alarm = true
                 _G.LCD_STATE = true
                 _G.SCREEN_STATE = 0
             else
-                log.info("********************************退出开关箱模式")
+                log.info("********************************退出温度超限模式")
                 _G.temp_alarm = false
                 _G.LCD_STATE = true
                 _G.SCREEN_STATE = 0
             end
         else
         end
-    elseif _G.SCREEN_STATE == 5 then
+    elseif _G.SCREEN_STATE == 6 then
         if msg == cpu.INT_GPIO_POSEDGE then
             pm.wake("SCREEN_KEY")
             if _G.BLE_SCREEN_STATE then
-                log.info("********************************进入开关箱模式")
+                log.info("********************************进入蓝牙模式")
                 _G.BLE_STATE = true
                 _G.LCD_STATE = true
                 _G.SCREEN_STATE = 0
             else
-                log.info("********************************退出开关箱模式")
+                log.info("********************************退出蓝牙模式")
                 _G.BLE_STATE = false
                 _G.LCD_STATE = true
                 _G.SCREEN_STATE = 0

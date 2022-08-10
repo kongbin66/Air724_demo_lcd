@@ -39,7 +39,7 @@ function rec_keyIntFnc(msg)
                     end
                 end
                 pm.sleep("REC_KEY")
-            else
+            else  --按下
                 pm.wake("REC_KEY")
                 rec_key_down_start = rtos.tick()
                 task_auto_screenoff.oled_on_start = rtos.tick()
@@ -52,7 +52,7 @@ function rec_keyIntFnc(msg)
                 pm.wake("REC_KEY")
                 task_auto_screenoff.oled_on_start = rtos.tick()
             end
-        elseif _G.SCREEN_STATE == 2 then
+        elseif _G.SCREEN_STATE == 4 then
             if msg == cpu.INT_GPIO_POSEDGE then
                 _G.LOCK_SCREEN_STATE = not _G.LOCK_SCREEN_STATE
                 pm.sleep("REC_KEY")
@@ -60,7 +60,7 @@ function rec_keyIntFnc(msg)
                 pm.wake("REC_KEY")
                 task_auto_screenoff.oled_on_start = rtos.tick()
             end
-        elseif _G.SCREEN_STATE == 3 then
+        elseif _G.SCREEN_STATE == 5 then
             if msg == cpu.INT_GPIO_POSEDGE then
                 _G.U_SCREEN_STATE = not _G.U_SCREEN_STATE
                 pm.sleep("REC_KEY")
@@ -68,7 +68,7 @@ function rec_keyIntFnc(msg)
                 pm.wake("REC_KEY")
                 task_auto_screenoff.oled_on_start = rtos.tick()
             end
-        elseif _G.SCREEN_STATE == 4 then
+        elseif _G.SCREEN_STATE == 2 then
             if msg == cpu.INT_GPIO_POSEDGE then
                 _G.TA_SCREEN_STATE = not _G.TA_SCREEN_STATE
                 pm.sleep("REC_KEY")
@@ -76,7 +76,7 @@ function rec_keyIntFnc(msg)
                 pm.wake("REC_KEY")
                 task_auto_screenoff.oled_on_start = rtos.tick()
             end
-        elseif _G.SCREEN_STATE == 5 then
+        elseif _G.SCREEN_STATE == 6 then
             if msg == cpu.INT_GPIO_POSEDGE then
                 _G.BLE_SCREEN_STATE = not _G.BLE_SCREEN_STATE
                 pm.sleep("REC_KEY")

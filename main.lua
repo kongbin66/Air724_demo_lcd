@@ -9,7 +9,7 @@ VERSION = "2.0.0"
 PRODUCT_KEY = "gpqF0cVyxMCHpOQtNmF0PJHA4t69z1PW"
 --------------------------------------------------------♥♥♥♥♥♥♥♥♥♥-------------------------------------
 require "log"
--- LOG_LEVEL = log.LOGLEVEL_TRACE
+--LOG_LEVEL = log.LOGLEVEL_TRACE
 LOG_LEVEL = log.LOGLEVEL_WARN
 --[[
 如果使用UART输出日志，打开这行注释的代码"--log.openTrace(true,1,115200)"即可，根据自己的需求修改此接口的参数
